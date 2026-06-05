@@ -5,26 +5,22 @@
 
 	let { onback } = $props();
 
-	// Horloge live : le code se régénère chaque seconde (anti-capture, comme un vrai pass).
-	let now = $state(new Date());
-	$effect(() => {
-		const id = setInterval(() => (now = new Date()), 1000);
-		return () => clearInterval(id);
-	});
+	// Heure d'émission figée (le code ne change jamais).
+	const clock = '10:00:00';
 
-	const clock = $derived(now.toLocaleTimeString('fr-FR', { hour12: false }));
-	// Charge utile fictive façon billet sécurisé (jamais de vraie donnée).
-	const payload = $derived(
-		[
-			'AHP1',
-			pass.reference,
-			pass.travellerShort.replace(/[.\s]/g, ''),
-			pass.type.replace(/\s/g, '').toUpperCase(),
-			pass.validOn,
-			journey.ticketNumber.replace(/\s/g, ''),
-			Math.floor(now.getTime() / 1000)
-		].join('|')
-	);
+	// Charge utile fictive, FIXE → code Aztec inchangeable (jamais de vraie donnée).
+	const payload = [
+		'AHP1',
+		pass.reference,
+		pass.travellerShort.replace(/[.\s]/g, ''),
+		pass.type.replace(/\s/g, '').toUpperCase(),
+		pass.validOn,
+		journey.ticketNumber.replace(/\s/g, ''),
+		pass.dateOfBirth,
+		pass.residence,
+		pass.issuer,
+		pass.lastDayOfValidity
+	].join('|');
 </script>
 
 <Header title="Billet" {onback} />
