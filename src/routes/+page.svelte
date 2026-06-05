@@ -1,6 +1,5 @@
 <script>
 	import PhoneFrame from '$lib/components/PhoneFrame.svelte';
-	import StatusBar from '$lib/components/StatusBar.svelte';
 	import BottomNav from '$lib/components/BottomNav.svelte';
 	import PassScreen from '$lib/screens/PassScreen.svelte';
 	import TicketScreen from '$lib/screens/TicketScreen.svelte';
@@ -15,8 +14,6 @@
 </script>
 
 <PhoneFrame>
-	<StatusBar />
-
 	{#if screen === 'pass'}
 		<PassScreen onshowticket={() => go('ticket')} ondetails={() => go('details')} />
 	{:else if screen === 'ticket'}

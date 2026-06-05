@@ -3,7 +3,7 @@
 	let { title, onback, showMenu = false } = $props();
 </script>
 
-<div class="flex items-center justify-between bg-night px-4 pb-4 text-white">
+<div class="flex items-center justify-between bg-night px-4 pt-5 pb-4 text-white">
 	<button
 		onclick={onback}
 		aria-label="Retour"
