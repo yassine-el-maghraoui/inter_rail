@@ -16,8 +16,9 @@
 
 	// Texte de sécurité répété en filigrane (données fictives).
 	const wmText = `${pass.productName.toUpperCase()} / ${pass.travellerShort.toUpperCase()} / ${pass.dateOfBirth.slice(0, 5)} / ${pass.reference} / ${pass.type.toUpperCase()} / ${pass.validOn}`;
-	const wmLine = `${wmText}  ·  ${wmText}  ·  ${wmText}`;
-	const wmRows = Array.from({ length: 12 });
+	const wmLine = `${wmText} / ${wmText} / ${wmText} / ${wmText}`;
+	// Décalage horizontal par ligne pour un rendu organique (comme un vrai filigrane).
+	const wmOffsets = [-120, -40, -160, -70, -200, -90, -150, -30, -180, -110, -60, -140, -90, -20];
 </script>
 
 <Header title="Détails" {onback} />
@@ -63,34 +64,49 @@
 
 	<!-- bloc émetteur avec filigrane de sécurité -->
 	<div class="relative mt-6 overflow-hidden">
-		<!-- filigrane : texte répété en diagonale -->
+		<!-- filigrane : texte répété en diagonale, décalé ligne par ligne -->
 		<div
-			class="pointer-events-none absolute inset-0 -left-1/4 flex w-[150%] -rotate-[15deg] flex-col justify-center gap-3 select-none"
+			class="pointer-events-none absolute inset-0 -top-6 -left-1/3 flex w-[180%] -rotate-[14deg] flex-col justify-between select-none"
 			aria-hidden="true"
 		>
-			{#each wmRows as _, i (i)}
-				<p class="truncate text-sm font-semibold whitespace-nowrap text-gray-300/70">{wmLine}</p>
+			{#each wmOffsets as off, i (i)}
+				<p
+					class="text-base font-semibold whitespace-nowrap text-gray-400/45"
+					style="margin-left: {off}px"
+				>
+					{wmLine}
+				</p>
 			{/each}
 		</div>
-		<!-- vagues guilloché -->
+
+		<!-- filet guilloché : deux jeux de vagues croisées -->
 		<svg
-			class="pointer-events-none absolute inset-0 h-full w-full text-gray-200"
+			class="pointer-events-none absolute inset-0 h-full w-full text-gray-300/80"
 			aria-hidden="true"
 			preserveAspectRatio="none"
 		>
-			{#each Array.from({ length: 8 }) as _, i (i)}
+			{#each Array.from({ length: 16 }) as _, i (i)}
 				<path
-					d="M0 {18 + i * 24} Q 90 {6 + i * 24}, 180 {18 + i * 24} T 360 {18 + i * 24} T 540 {18 +
-						i * 24}"
+					d="M0 {14 + i * 20} Q 70 {2 + i * 20}, 140 {14 + i * 20} T 280 {14 + i * 20} T 420 {14 +
+						i * 20} T 560 {14 + i * 20} T 700 {14 + i * 20}"
 					fill="none"
 					stroke="currentColor"
-					stroke-width="1"
+					stroke-width="0.8"
+				/>
+			{/each}
+			{#each Array.from({ length: 16 }) as _, i (i)}
+				<path
+					d="M0 {24 + i * 20} Q 70 {36 + i * 20}, 140 {24 + i * 20} T 280 {24 + i * 20} T 420 {24 +
+						i * 20} T 560 {24 + i * 20} T 700 {24 + i * 20}"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="0.8"
 				/>
 			{/each}
 		</svg>
 
 		<!-- contenu au-dessus -->
-		<div class="relative z-10 py-6">
+		<div class="relative z-10 py-8">
 			<div class="flex justify-between text-night">
 				<div>
 					<p class="text-base">Issuer</p>
