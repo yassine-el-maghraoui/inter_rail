@@ -35,8 +35,8 @@ export const journey = {
 	depart: '21:00',
 	arrive: '06:50',
 	train: 'SSF18075',
-	note: 'Alles klar! Lege deine Fahrkarte bei Kontrollen vor.',
-	passOnly: 'Nur mit dem Aegean Hopper Pass',
+	note: "C'est bon ! Présente ton billet lors des contrôles.",
+	passOnly: "Uniquement avec l'Aegean Hopper Pass",
 	seatReservation: 'Seat reservations required'
 };
 
