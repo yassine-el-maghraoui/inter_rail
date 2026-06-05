@@ -12,9 +12,9 @@ export const pass = {
 	validityPeriod: '5 Jun – 5 Jul 2026',
 	lastDayOfValidity: '05-07-2026',
 	issuedOn: '03-06-2026',
-	activatedOn: '05-06-2026, 20:07',
-	lastOnline: '05-06-2026, 20:07',
-	validOn: '05-06-2026',
+	activatedOn: '06-06-2026, 09:14',
+	lastOnline: '06-06-2026, 09:30',
+	validOn: '06-06-2026',
 	issuer: '9901',
 	standard: 'CIV',
 	daysUsed: 1,
@@ -29,12 +29,14 @@ export const days = [
 ];
 
 export const journey = {
-	date: 'Friday, 5 Jun 2026',
-	from: 'Verdania Ferry Terminal',
-	to: 'Halkos Town',
-	depart: '21:00',
-	arrive: '06:50',
-	train: 'SSF18075',
+	date: 'Saturday, 6 Jun 2026',
+	from: 'Piraeus',
+	to: 'Poros',
+	depart: '10:00',
+	arrive: '11:05',
+	train: 'FLYINGCAT 4',
+	gate: 'E9',
+	ticketNumber: 'A 59426508',
 	note: "C'est bon ! Présente ton billet lors des contrôles.",
 	passOnly: "Uniquement avec l'Aegean Hopper Pass",
 	seatReservation: 'Seat reservations required'

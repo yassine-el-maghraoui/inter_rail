@@ -53,6 +53,9 @@
 			<p class="text-xl text-night">
 				<span class="font-bold">{journey.arrive}</span> {journey.train}
 			</p>
+			<p class="mt-1 text-base text-gray-500">
+				Gate {journey.gate} · Ticket {journey.ticketNumber}
+			</p>
 
 			<div class="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow ring-1 ring-gray-100">
 				<AlertCircle class="h-5 w-5 fill-orange-500 text-white" />
