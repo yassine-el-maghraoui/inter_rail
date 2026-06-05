@@ -13,6 +13,11 @@
 		['Activated on', pass.activatedOn],
 		['Last online', pass.lastOnline]
 	];
+
+	// Texte de sécurité répété en filigrane (données fictives).
+	const wmText = `${pass.productName.toUpperCase()} / ${pass.travellerShort.toUpperCase()} / ${pass.dateOfBirth.slice(0, 5)} / ${pass.reference} / ${pass.type.toUpperCase()} / ${pass.validOn}`;
+	const wmLine = `${wmText}  ·  ${wmText}  ·  ${wmText}`;
+	const wmRows = Array.from({ length: 12 });
 </script>
 
 <Header title="Détails" {onback} />
@@ -56,29 +61,59 @@
 		</div>
 	</div>
 
-	<div class="my-6 border-t border-gray-200"></div>
-
-	<div class="flex justify-between text-night">
-		<div>
-			<p class="text-base">Issuer</p>
-			<p class="text-lg font-bold">{pass.issuer}</p>
+	<!-- bloc émetteur avec filigrane de sécurité -->
+	<div class="relative mt-6 overflow-hidden">
+		<!-- filigrane : texte répété en diagonale -->
+		<div
+			class="pointer-events-none absolute inset-0 -left-1/4 flex w-[150%] -rotate-[15deg] flex-col justify-center gap-3 select-none"
+			aria-hidden="true"
+		>
+			{#each wmRows as _, i (i)}
+				<p class="truncate text-sm font-semibold whitespace-nowrap text-gray-300/70">{wmLine}</p>
+			{/each}
 		</div>
-		<div>
-			<p class="text-base">{pass.standard}</p>
+		<!-- vagues guilloché -->
+		<svg
+			class="pointer-events-none absolute inset-0 h-full w-full text-gray-200"
+			aria-hidden="true"
+			preserveAspectRatio="none"
+		>
+			{#each Array.from({ length: 8 }) as _, i (i)}
+				<path
+					d="M0 {18 + i * 24} Q 90 {6 + i * 24}, 180 {18 + i * 24} T 360 {18 + i * 24} T 540 {18 +
+						i * 24}"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1"
+				/>
+			{/each}
+		</svg>
+
+		<!-- contenu au-dessus -->
+		<div class="relative z-10 py-6">
+			<div class="flex justify-between text-night">
+				<div>
+					<p class="text-base">Issuer</p>
+					<p class="text-lg font-bold">{pass.issuer}</p>
+				</div>
+				<div>
+					<p class="text-base">{pass.standard}</p>
+				</div>
+			</div>
+			<div class="mt-10 flex justify-between text-night">
+				<div>
+					<p class="text-base">Issued on</p>
+					<p class="text-lg font-bold">{pass.issuedOn}</p>
+				</div>
+				<div>
+					<p class="text-base">Last day of validity</p>
+					<p class="text-lg font-bold">{pass.lastDayOfValidity}</p>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="mt-4 flex justify-between text-night">
-		<div>
-			<p class="text-base">Issued on</p>
-			<p class="text-lg font-bold">{pass.issuedOn}</p>
-		</div>
-		<div>
-			<p class="text-base">Last day of validity</p>
-			<p class="text-lg font-bold">{pass.lastDayOfValidity}</p>
-		</div>
-	</div>
 
-	<button class="mt-8 w-full text-center text-lg font-medium text-night underline">
+	<button class="mt-4 w-full text-center text-lg font-medium text-night underline">
 		View the Conditions of Use of the Pass
 	</button>
 </div>
