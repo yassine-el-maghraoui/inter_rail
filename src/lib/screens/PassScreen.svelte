@@ -22,13 +22,13 @@
 
 	<!-- nom + détails -->
 	<div class="flex items-start justify-between gap-4">
-		<div>
+		<div class="min-w-0">
 			<p class="text-sm text-gray-400">Name</p>
-			<p class="mt-0.5 text-2xl text-night">{pass.traveller}</p>
+			<p class="mt-0.5 text-2xl break-words text-night">{pass.traveller}</p>
 		</div>
 		<button
 			onclick={ondetails}
-			class="rounded-xl border border-gray-200 px-5 py-3 text-lg text-night shadow-sm transition hover:bg-gray-50"
+			class="shrink-0 rounded-xl border border-gray-200 px-5 py-3 text-lg text-night shadow-sm transition hover:bg-gray-50"
 			>Details</button
 		>
 	</div>
