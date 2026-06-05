@@ -1,12 +1,30 @@
 <script>
 	import Header from '$lib/components/Header.svelte';
-	import QrCode from '$lib/components/QrCode.svelte';
-	import { pass, qrTarget } from '$lib/data.js';
+	import AztecCode from '$lib/components/AztecCode.svelte';
+	import { pass, journey } from '$lib/data.js';
 
 	let { onback } = $props();
 
-	const now = new Date();
-	const clock = now.toLocaleTimeString('fr-FR', { hour12: false });
+	// Horloge live : le code se régénère chaque seconde (anti-capture, comme un vrai pass).
+	let now = $state(new Date());
+	$effect(() => {
+		const id = setInterval(() => (now = new Date()), 1000);
+		return () => clearInterval(id);
+	});
+
+	const clock = $derived(now.toLocaleTimeString('fr-FR', { hour12: false }));
+	// Charge utile fictive façon billet sécurisé (jamais de vraie donnée).
+	const payload = $derived(
+		[
+			'AHP1',
+			pass.reference,
+			pass.travellerShort.replace(/[.\s]/g, ''),
+			pass.type.replace(/\s/g, '').toUpperCase(),
+			pass.validOn,
+			journey.ticketNumber.replace(/\s/g, ''),
+			Math.floor(now.getTime() / 1000)
+		].join('|')
+	);
 </script>
 
 <Header title="Billet" {onback} />
@@ -20,7 +38,7 @@
 
 		<div class="flex flex-col items-center px-5 pb-5">
 			<div class="rounded-xl bg-white p-3">
-				<QrCode value={qrTarget} size={280} />
+				<AztecCode value={payload} size={280} />
 			</div>
 			<p class="mt-3 text-base tracking-wide text-night/70">
 				PASS NUMBER <span class="font-bold text-night">{pass.reference}</span>

@@ -41,5 +41,3 @@ export const journey = {
 	passOnly: "Uniquement avec l'Aegean Hopper Pass",
 	seatReservation: 'Seat reservations required'
 };
-
-export const qrTarget = 'https://example.com/demo';
