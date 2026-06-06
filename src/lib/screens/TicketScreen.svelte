@@ -5,8 +5,15 @@
 
 	let { onback } = $props();
 
-	// Heure d'émission figée (le code ne change jamais).
-	const clock = '10:00:00';
+	// Heure actuelle live, fuseau d'Athènes (Europe/Athens).
+	let now = $state(new Date());
+	$effect(() => {
+		const id = setInterval(() => (now = new Date()), 1000);
+		return () => clearInterval(id);
+	});
+	const clock = $derived(
+		now.toLocaleTimeString('fr-FR', { hour12: false, timeZone: 'Europe/Athens' })
+	);
 </script>
 
 <Header title="Billet" {onback} />
@@ -14,7 +21,7 @@
 <div class="flex-1 overflow-y-auto bg-white px-5 py-5">
 	<!-- card billet style ticket -->
 	<div class="rounded-2xl bg-white shadow-lg ring-1 ring-gray-100">
-		<div class="flex justify-end px-5 pt-4">
+		<div class="flex justify-start px-5 pt-4">
 			<span class="text-xl font-semibold text-night">{clock}</span>
 		</div>
 
