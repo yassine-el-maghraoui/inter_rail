@@ -21,7 +21,7 @@
 <div class="flex-1 overflow-y-auto bg-white px-5 py-5">
 	<!-- card billet style ticket -->
 	<div class="rounded-2xl bg-white shadow-lg ring-1 ring-gray-100">
-		<div class="flex justify-start px-5 pt-4">
+		<div class="flex justify-end px-5 pt-4">
 			<span class="text-xl font-semibold text-night">{clock}</span>
 		</div>
 
