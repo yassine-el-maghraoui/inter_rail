@@ -1,26 +1,12 @@
 <script>
 	import Header from '$lib/components/Header.svelte';
 	import AztecCode from '$lib/components/AztecCode.svelte';
-	import { pass, journey } from '$lib/data.js';
+	import { pass } from '$lib/data.js';
 
 	let { onback } = $props();
 
 	// Heure d'émission figée (le code ne change jamais).
 	const clock = '10:00:00';
-
-	// Charge utile fictive, FIXE → code Aztec inchangeable (jamais de vraie donnée).
-	const payload = [
-		'AHP1',
-		pass.reference,
-		pass.travellerShort.replace(/[.\s]/g, ''),
-		pass.type.replace(/\s/g, '').toUpperCase(),
-		pass.validOn,
-		journey.ticketNumber.replace(/\s/g, ''),
-		pass.dateOfBirth,
-		pass.residence,
-		pass.issuer,
-		pass.lastDayOfValidity
-	].join('|');
 </script>
 
 <Header title="Billet" {onback} />
@@ -33,10 +19,10 @@
 		</div>
 
 		<div class="flex flex-col items-center px-5 pb-5">
-			<div class="rounded-xl bg-white p-3">
-				<AztecCode value={payload} size={280} />
+			<div class="my-2 w-full">
+				<AztecCode passNumber={pass.reference} />
 			</div>
-			<p class="mt-3 text-base tracking-wide text-night/70">
+			<p class="mt-1.5 text-base tracking-wide text-night/70">
 				PASS NUMBER <span class="font-bold text-night">{pass.reference}</span>
 			</p>
 		</div>
